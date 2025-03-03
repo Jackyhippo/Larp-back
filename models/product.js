@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, ObjectId } from 'mongoose'
 
 const schema = new Schema(
   {
@@ -62,6 +62,12 @@ const schema = new Schema(
         values: ['需換裝', '不需換裝'],
         message: 'productDressCodeInvalid',
       },
+    },
+    // 這裡不需要傳遞 `owner`，會根據用戶登入時的資料自動填入
+    owner: {
+      type: ObjectId,
+      ref: 'users', // 參考 `users` 集合
+      required: true,
     },
   },
   {

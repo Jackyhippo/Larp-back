@@ -81,6 +81,11 @@ const schema = new Schema(
     cart: {
       type: [cartSchema],
     },
+    // ➕ 管理員的商品庫
+    products: {
+      type: [{ type: ObjectId, ref: 'products' }], // 參考 `products` 集合
+      default: [], // 預設為空陣列
+    },
   },
   {
     // 告訴 Mongoose 不要在每個文檔中自動創建 _v 字段（這是 Mongoose 用來追踪文檔版本的）。

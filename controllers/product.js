@@ -5,6 +5,10 @@ import validator from 'validator'
 // 上架商品
 export const create = async (req, res) => {
   try {
+    // 1. 從請求中獲取當前用戶的 ID
+    const userId = req.user._id
+    // 2. 自動設置 `owner` 欄位
+    req.body.owner = userId
     req.body.image = req.file?.path || ''
     const result = await Product.create(req.body)
     res.status(StatusCodes.OK).json({
