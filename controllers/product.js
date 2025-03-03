@@ -56,7 +56,9 @@ export const get = async (req, res) => {
 // 取得所有商品 (包含未上架的)。
 export const getAll = async (req, res) => {
   try {
-    const result = await Product.find()
+    const userId = req.user._id // 獲取當前登入者的 ID
+    const result = await Product.find({ owner: userId }) // 只查詢該管理員的商品
+    // const result = await Product.find()
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
